@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms'
   selector: 'app-new-task',
   standalone: true,
   imports: [FormsModule],
-  templateUrl: './new-task.component.html',
-  styleUrl: './new-task.component.css',
+  templateUrl: './new-task.html',
+  styleUrl: './new-task.scss',
 })
 export class NewTaskComponent {
   private readonly formEl = viewChild<ElementRef<HTMLFormElement>>('form')

@@ -24,8 +24,8 @@ const getCurrentTaskStatusLabel = (taskStatus: TaskStatus) => {
   selector: 'app-task-item',
   standalone: true,
   imports: [FormsModule],
-  templateUrl: './task-item.component.html',
-  styleUrl: './task-item.component.css',
+  templateUrl: './task-item.html',
+  styleUrl: './task-item.css',
 })
 export class TaskItemComponent {
   task = input.required<Task>()

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 
-import { TasksComponent } from './tasks/tasks.component'
+import { TasksComponent } from './tasks/tasks'
 
 @Component({
   selector: 'app-root',
