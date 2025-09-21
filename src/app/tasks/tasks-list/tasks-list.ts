@@ -12,9 +12,8 @@ import { getCurrentTaskStatus, TaskItemComponent } from './task-item/task-item'
 })
 export class TasksListComponent {
   private readonly tasksService = inject(TasksService)
-  selectedFilter = signal<string>('all')
-  // eslint-disable-next-line unicorn/consistent-function-scoping
-  tasks = computed(() => {
+  private readonly selectedFilter = signal<string>('all')
+  private readonly filterTasks = () => {
     return this.selectedFilter() === 'all'
       ? this.tasksService.allTasks()
       : this.tasksService
@@ -23,7 +22,8 @@ export class TasksListComponent {
             (task) =>
               task.status === getCurrentTaskStatus(this.selectedFilter()),
           )
-  })
+  }
+  tasks = computed(this.filterTasks)
 
   onChangeTasksFilter(filter: string) {
     this.selectedFilter.set(filter)
