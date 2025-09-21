@@ -1,7 +1,7 @@
-import { Component, inject, signal } from '@angular/core'
+import { Component, computed, inject, signal } from '@angular/core'
 
 import { TasksService } from '../tasks-service'
-import { TaskItemComponent } from './task-item/task-item'
+import { getCurrentTaskStatus, TaskItemComponent } from './task-item/task-item'
 
 @Component({
   selector: 'app-tasks-list',
@@ -11,9 +11,19 @@ import { TaskItemComponent } from './task-item/task-item'
   imports: [TaskItemComponent],
 })
 export class TasksListComponent {
-  tasksService = inject(TasksService)
+  private readonly tasksService = inject(TasksService)
   selectedFilter = signal<string>('all')
-  tasks = this.tasksService.allTasks
+  // eslint-disable-next-line unicorn/consistent-function-scoping
+  tasks = computed(() => {
+    return this.selectedFilter() === 'all'
+      ? this.tasksService.allTasks()
+      : this.tasksService
+          .allTasks()
+          .filter(
+            (task) =>
+              task.status === getCurrentTaskStatus(this.selectedFilter()),
+          )
+  })
 
   onChangeTasksFilter(filter: string) {
     this.selectedFilter.set(filter)

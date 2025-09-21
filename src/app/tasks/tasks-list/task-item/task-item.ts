@@ -21,7 +21,7 @@ const getCurrentTaskStatusLabel = (taskStatus: TaskStatus) => {
   }
 }
 
-const getCurrentTaskStatus = (statusValue: string): TaskStatus => {
+export const getCurrentTaskStatus = (statusValue: string): TaskStatus => {
   switch (statusValue) {
     case 'open': {
       return 'OPEN'
